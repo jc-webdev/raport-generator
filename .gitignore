@@ -1,6 +1,14 @@
-# Środowiska/zależności — odtwarzalne przez uruchom-panel.bat / npm install
+# Środowiska/zależności — odtwarzalne przez uruchom-panel.bat / npm install.
+# WYJĄTEK: panel/docx/node_modules JEST wersjonowany (patrz niżej) — na
+# niektórych firmowych sieciach dostęp do registry.npmjs.org jest zerwany
+# na poziomie TLS (SSL inspection łamiąca handshake, ERR_SSL_PACKET_LENGTH_
+# TOO_LONG) i `npm install` tam w ogóle nie zadziała. To tylko czysty JS
+# (docx + małe transitive deps, bez skompilowanych binarek), więc jest w
+# pełni przenośny między systemami — bezpieczniej dowieźć go razem z repo
+# niż liczyć, że npm install się uda na docelowej maszynie.
 generator-mapek/venv/
 node_modules/
+!panel/docx/node_modules/
 
 # Cache generatorów (dane OSM, dogrywają się same przy pierwszym użyciu)
 generator-mapek/cache/
