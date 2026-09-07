@@ -349,10 +349,16 @@ function zwalidujMapowanie(punkt) {
 // tylko wbudowany `fetch` w Node 22) dla koordynatów punktu (krok 2) + daty
 // pomiaru (krok 4, już auto-wykrytej z pliku) zwraca średnią temperaturę
 // dobową i sumę opadów.
+// AbortSignal.timeout — bez tego zerwane/zablokowane połączenie (np. firewall
+// firmowy cicho odrzucający pakiety, bez odpowiedzi) potrafi wisieć znacznie
+// dłużej niż limity nałożone na spawnowane skrypty Pythona (tam execFile ma
+// twardy timeout), sprawiając wrażenie zawieszonego generowania raportu.
+const TIMEOUT_FETCH_MS = 15000;
+
 async function wykryjPogode(lat, lon, data) {
   const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
     + `&start_date=${data}&end_date=${data}&daily=temperature_2m_mean,precipitation_sum&timezone=Europe%2FWarsaw`;
-  const odpowiedz = await fetch(url);
+  const odpowiedz = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_FETCH_MS) });
   if (!odpowiedz.ok) throw new Error(`Open-Meteo zwróciło błąd HTTP ${odpowiedz.status}`);
   const dane = await odpowiedz.json();
   const temperatura = dane.daily?.temperature_2m_mean?.[0];
@@ -370,7 +376,7 @@ async function wykryjPogode(lat, lon, data) {
 async function wykryjPogodeGodzinowo(lat, lon, data) {
   const url = `https://archive-api.open-meteo.com/v1/archive?latitude=${lat}&longitude=${lon}`
     + `&start_date=${data}&end_date=${data}&hourly=temperature_2m,precipitation&timezone=Europe%2FWarsaw`;
-  const odpowiedz = await fetch(url);
+  const odpowiedz = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_FETCH_MS) });
   if (!odpowiedz.ok) throw new Error(`Open-Meteo zwróciło błąd HTTP ${odpowiedz.status}`);
   const dane = await odpowiedz.json();
   const temperatura = dane.hourly?.temperature_2m;
@@ -524,17 +530,21 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
   const { lat, lng: lon } = punkt.lokalizacja;
 
   try {
+    console.log(`[${punkt.id}] mapka lokalizacji: generuję (OSM, może potrwać ok. 1-2 min przy pierwszym użyciu tej okolicy)...`);
     const sciezka = path.join(dirPunktu, "mapka_lokalizacji.png");
     await generujMapkeLokalizacji(lat, lon, sciezka);
     wynik.mapkaLokalizacji = sciezka;
+    console.log(`[${punkt.id}] mapka lokalizacji: gotowe ✓`);
   } catch (e) {
     console.error(`[${punkt.id}] mapka lokalizacji: ${e.message}`);
   }
 
   try {
+    console.log(`[${punkt.id}] schemat skrzyżowania: generuję (OSM)...`);
     const sciezka = path.join(dirPunktu, "schemat_skrzyzowania.png");
     await generujSchematSkrzyzowania(lat, lon, sciezka);
     wynik.schematSkrzyzowania = sciezka;
+    console.log(`[${punkt.id}] schemat skrzyżowania: gotowe ✓`);
   } catch (e) {
     console.error(`[${punkt.id}] schemat skrzyżowania: ${e.message}`);
   }
@@ -542,6 +552,7 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
   try {
     const dataPomiaru = punkt.metadanePomiaru && punkt.metadanePomiaru.dataPomiaru;
     if (!dataPomiaru) throw new Error("brak daty pomiaru");
+    console.log(`[${punkt.id}] wykres pogody: pobieram dane z Open-Meteo...`);
     const godzinowa = await wykryjPogodeGodzinowo(lat, lon, dataPomiaru);
     const sciezkaDane = path.join(dirPunktu, "_pogoda.json");
     fs.writeFileSync(sciezkaDane, JSON.stringify(godzinowa));
@@ -549,11 +560,13 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
     await generujObraz(["generuj_wykres_pogoda.py", sciezkaDane, sciezka]);
     fs.unlinkSync(sciezkaDane);
     wynik.wykresPogoda = sciezka;
+    console.log(`[${punkt.id}] wykres pogody: gotowe ✓`);
   } catch (e) {
     console.error(`[${punkt.id}] wykres pogody: ${e.message}`);
   }
 
   try {
+    console.log(`[${punkt.id}] Sankey: przygotowuję dane i wykrywam wloty (OSM)...`);
     const sciezkaCsv = path.join(dirPunktu, "relacje_synth.csv");
     const sciezkaMappingBazowa = path.join(dirPunktu, "relacje_mapping_bazowa.json");
     await spawnPython([
@@ -569,9 +582,11 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
 
     for (const [klucz, metryka] of Object.entries(METRYKI_SANKEY)) {
       try {
+        console.log(`[${punkt.id}] ${klucz}: generuję...`);
         const sciezka = path.join(dirPunktu, `${klucz}.png`);
         await generujSankey(lat, lon, sciezkaCsv, sciezkaMapping, metryka, sciezka);
         wynik[klucz] = sciezka;
+        console.log(`[${punkt.id}] ${klucz}: gotowe ✓`);
       } catch (e) {
         console.error(`[${punkt.id}] ${klucz}: ${e.message}`);
       }
@@ -584,6 +599,7 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
 }
 
 async function zbudujRaport(projekt) {
+  console.log(`Rozpoczynam generowanie raportu: "${projekt.metadaneProjektu.nazwaProjektu}" (${projekt.punkty.length} pkt.)`);
   const brakObliczen = projekt.punkty.filter((p) => !p.obliczenia).map((p) => p.id);
   if (brakObliczen.length > 0) {
     throw new Error(`Punkty bez ukończonego kroku 7 (obliczenia): ${brakObliczen.join(", ")}`);
@@ -602,6 +618,7 @@ async function zbudujRaport(projekt) {
 
   const punktyFixture = [];
   for (const punkt of projekt.punkty) {
+    console.log(`[${punkt.id}] przetwarzanie punktu...`);
     const dirPunktu = path.join(dirAssets, punkt.id);
     fs.mkdirSync(dirPunktu, { recursive: true });
     const sciezkaPoryDoby = path.join(dirPunktu, "pory_doby.png");
@@ -738,6 +755,7 @@ async function zbudujRaport(projekt) {
   const sciezkaFixture = path.join(dirBuild, "fixture.json");
   fs.writeFileSync(sciezkaFixture, JSON.stringify(fixture, null, 2));
 
+  console.log("Buduję dokument .docx...");
   const sciezkaDocx = path.join(dirBuild, "raport.docx");
   await new Promise((resolve, reject) => {
     execFile(
@@ -747,6 +765,7 @@ async function zbudujRaport(projekt) {
       (err, stdout, stderr) => (err ? reject(new Error(stderr || err.message)) : resolve()),
     );
   });
+  console.log("Raport gotowy ✓");
 
   return sciezkaDocx;
 }
