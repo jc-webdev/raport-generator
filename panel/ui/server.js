@@ -43,6 +43,17 @@ function pythonBin() {
   return "python3";
 }
 
+// Na Windows Python domyślnie koduje stdout/stdin/pliki wg strony kodowej
+// konsoli (np. cp1250), nie UTF-8 — polskie znaki w JSON-ie/nazwach relacji
+// wymienianych między Pythonem a Node psują się w locie (np. "Północny"
+// staje się nieodwracalnie uszkodzone znakiem zastępczym U+FFFD). PYTHONUTF8
+// wymusza tryb UTF-8 (PEP 540) dla całego I/O Pythona niezależnie od
+// systemowej strony kodowej — musi być w env KAŻDEGO spawnowanego procesu
+// Pythona, nie tylko tego czytającego pliki.
+function envPython() {
+  return { ...process.env, PYTHONUTF8: "1", PYTHONIOENCODING: "utf-8" };
+}
+
 if (!fs.existsSync(PROJEKTY_DIR)) fs.mkdirSync(PROJEKTY_DIR, { recursive: true });
 
 const MIME = {
@@ -170,7 +181,7 @@ function konwertujHistoryNaQuantity(tresc) {
     execFile(
       pythonBin(),
       ["-m", "panel.silnik.uruchom_konwersje_history", tmpIn, tmpOut],
-      { cwd: REPO_ROOT, maxBuffer: 20 * 1024 * 1024 },
+      { cwd: REPO_ROOT, maxBuffer: 20 * 1024 * 1024, env: envPython() },
       (err, stdout, stderr) => {
         fs.rmSync(tmpIn, { force: true });
         if (err) {
@@ -400,7 +411,7 @@ function uruchomSilnik(sciezkaProjektu, numerPunktu) {
     execFile(
       pythonBin(),
       ["-m", "panel.silnik.uruchom_dla_punktu", sciezkaProjektu, String(numerPunktu)],
-      { cwd: REPO_ROOT, maxBuffer: 50 * 1024 * 1024 },
+      { cwd: REPO_ROOT, maxBuffer: 50 * 1024 * 1024, env: envPython() },
       (err, stdout, stderr) => {
         if (err) return reject(new Error(stderr || err.message));
         try { resolve(JSON.parse(stdout)); } catch (e) { reject(new Error(`Silnik zwrócił niepoprawny JSON: ${stdout.slice(0, 500)}`)); }
@@ -456,7 +467,7 @@ const PLACEHOLDERY_WSPOLNE = {
 
 function generujObraz(argi) {
   return new Promise((resolve, reject) => {
-    execFile(pythonBin(), argi, { cwd: DOCX_DIR, maxBuffer: 10 * 1024 * 1024 }, (err, stdout, stderr) => {
+    execFile(pythonBin(), argi, { cwd: DOCX_DIR, maxBuffer: 10 * 1024 * 1024, env: envPython() }, (err, stdout, stderr) => {
       if (err) return reject(new Error(stderr || err.message));
       resolve();
     });
@@ -472,7 +483,7 @@ function generujObraz(argi) {
 // osobno spada na placeholder — jeden nieudany rysunek nie blokuje reszty.
 function spawnPython(argi, cwd, timeoutMs = 120000) {
   return new Promise((resolve, reject) => {
-    execFile(pythonBin(), argi, { cwd, maxBuffer: 20 * 1024 * 1024, timeout: timeoutMs }, (err, stdout, stderr) => {
+    execFile(pythonBin(), argi, { cwd, maxBuffer: 20 * 1024 * 1024, timeout: timeoutMs, env: envPython() }, (err, stdout, stderr) => {
       if (err) return reject(new Error(stderr || err.message));
       resolve(stdout);
     });
@@ -1029,7 +1040,7 @@ const serwer = http.createServer(async (req, res) => {
           execFile(
             pythonBin(),
             ["-m", "panel.silnik.uruchom_teksty_dla_punktu", sciezkaProjektu(id), numerStr],
-            { cwd: REPO_ROOT, maxBuffer: 10 * 1024 * 1024 },
+            { cwd: REPO_ROOT, maxBuffer: 10 * 1024 * 1024, env: envPython() },
             (err, stdout, stderr) => (err ? reject(new Error(stderr || err.message)) : resolve(JSON.parse(stdout))),
           );
         });
