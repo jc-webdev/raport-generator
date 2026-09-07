@@ -1,0 +1,24 @@
+{
+  "gate_mapping": {
+    "A": ["PD", "Prawo"],
+    "B": ["PD", "Wprost"],
+    "C": ["PD", "Lewo"],
+    "D": ["WSCH", "Lewo"],
+    "E": ["WSCH", "Wprost"],
+    "F": ["WSCH", "Prawo"],
+    "G": ["ZACH", "Lewo"],
+    "H": ["ZACH", "Wprost"],
+    "I": ["ZACH", "Wprost"],
+    "J": ["ZACH", "Prawo"],
+    "K": ["PN", "Wprost"],
+    "L": ["PN", "Wprost"],
+    "M": ["PN", "Lewo"],
+    "N": ["PN", "Prawo"]
+  },
+  "wlot_to_arm_direction": {
+    "PD": "Południowo-Wschodni",
+    "WSCH": "Wschodni",
+    "ZACH": "Zachodni",
+    "PN": "Północno-Zachodni"
+  }
+}

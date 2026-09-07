@@ -1,0 +1,466 @@
+
+    
+    Wygeneruj plik docx na bazie tego polecenie. marginesy ustaw jako normalne.
+Dołączam też do tego diagramy, tabele i wykresy. Dołącz je w odpowiednich miejscach tak żeby pasowały do kontekstu. Dodaj im podpisy, numeruj zdjęcia i tabele. Jeżeli nie moższe dodać zdjęcia to zrób przynajmniej placeholder.
+
+Musimy mieć następujące podpunkty dla punktu pomiarowego (trzymaj się tego ściśle):
+1.1. Lokalizacja i parametry pomiaru
+	rysunek obraz z kamery + Opis + Tabela Parametry pomiaru.
+1.2. Organizacja ruchu i geometria skrzyżowania
+	opis + Diagram relacji ruchu + 3 diagramy natężeń ruchu pierwszy to szczyt dobowy, drugi szczyt popołudniowy i 3 szczyt wieczorny.
+1.3. Ruch według kierunków i relacji
+	opis + Tabela Zestawienie relacji ruchu (SDR) i szczytów godzinowych.
+1.4. Rozkład dobowy i pory ruchu
+	opis + Tabela Ruch według pór doby + rysunek - wykre sudziałów pór doby
+1.5. Struktura rodzajowa ruchu
+	Tabela Struktura rodzajowa ruchu +  opis + tabela Struktura rodzajowa pojazdów w dobie (5. Struktura godzinowa wg relacji), jest długa ale musi być cała. Tak na pewno. Nie pytaj ponownie.
+
+Wszystkie tabele i grafiki muszą mieć oznaczenia. Bedzie tutaj 6 punktów pomiarowych. To jest punkt pierwszy więc oznaczenia tabel i grafik muszą być np. 1.1, 1.2.
+    Przebuduj teksty ze wzorów bazując na danych z CSV. 
+Miasto pomiarów to Toruń. 
+Punkt pomiarowy: Skrzyżowanie Łódzka - Generała Władysława Andersa 
+
+Mapowanie kierunków:
+
+{'A': ('PD', 'Prawo'), 'B': ('PD', 'Wprost'), 'C': ('PD', 'Lewo'), 'D': ('WSCH', 'Lewo'), 'E': ('WSCH', 'Wprost'), 'F': ('WSCH', 'Prawo'), 'G': ('ZACH', 'Lewo'), 'H': ('ZACH', 'Wprost'), 'I': ('ZACH', 'Wprost'), 'J': ('ZACH', 'Prawo'), 'K': ('PN', 'Wprost'), 'L': ('PN', 'Wprost'), 'M': ('PN', 'Lewo'), 'N': ('PN', 'Prawo')}
+
+
+jeżeli w mapowaniu kierunków mamy wartość np. 'A-B': ('WSCH', 'Prawo') to oznacza że A-B to Wlot Wschodni i kierunek w prawo, chce żebyś tak opisywał kierunki i relacje i nie pisał tych oznaczeń A-E w ogóle. Jeżeli w jakieś tabeli się to pojawia np. Relacja i lista takich A-e, C-f... usuń tę kolumnę.
+
+Mam takie teksty do przebudowania:
+
+1. OPIS OGÓLNY
+wzór: Punkt pomiarowy SK1_B_Sępoleńska zlokalizowany jest na skrzyżowaniu w rejonie ulicy Sępoleńska w Bydgoszczy. Skrzyżowanie charakteryzuje się wyjątkowo nietypowym rozkładem ruchu, w którym relacje skrętne odgrywają kluczową rolę, obsługując prawie połowę całkowitego ruchu drogowego
+
+2. ANALIZA KIERUNKOWA RUCHU
+wzór: Punkt pomiarowy Most im. Józefa Piłsudskiego wyróżnia się wyjątkowo nietypowym rozkładem ruchu:
+Relacje osiowe (L+P): 4 054 poj./dobę (49,5% SDR)
+•	Relacja P: 2 106 poj./dobę (25,7%) – główna relacja osiowa
+•	Relacja L: 1 948 poj./dobę (23,8%)
+Przewaga P nad L wynosi zaledwie 8,1%, co wskazuje na zbilansowany ruch wahadłowy
+Relacje skrętne główne (L1+Z1): 3 622 poj./dobę (44,2% SDR)
+•	Relacja L1: 1 818 poj./dobę (22,2%) – druga co do wielkości relacja w punkcie
+•	Relacja Z1: 1 804 poj./dobę (22,0%) – trzecia co do wielkości relacja w punkcie
+Te dwie relacje skrętne obsługują prawie połowę całkowitego ruchu, co jest unikalną cechą tego skrzyżowania
+•	Relacje pomocnicze (P1+Z): 520 poj./dobę (6,3% SDR)
+Obsługują ruch lokalny o mniejszym znaczeniu.
+Tak wysoki udział relacji skrętnych L1 i Z1 wskazuje na szczególne znaczenie tego skrzyżowania jako węzła dystrybucyjnego, który kieruje ruch z osi północ-połudód (L-P) do obszarów PDodnich miasta. Relacje L1 i Z1 pełnią funkcję głównych tras połączeniowych między różnymi rejonami miejskimi, a nie jedynie lokalnych dróg dojazdowych.
+Rozkład szczytów godzinowych:
+•	Relacja P – szczyt popołudniowy o 15:00 (173 poj./h) – powroty z pracy
+•	Relacja L – szczyt popołudniowy o 15:00 (154 poj./h) – powroty z pracy
+•	Relacja L1 – szczyt popołudniowy o 16:00 (154 poj./h) – ruch lokalny związany z powrotami
+•	Relacja Z1 – szczyt popołudniowy o 14:00 (151 poj./h) – początek ruchu powrotnego przez relację skrętną
+
+3. CHARAKTERYSTYKA ROZKŁADU DOBOWEGO
+wzór: Charakterystyka rozkładu dobowego
+Zdecydowana większość ruchu (79,7%) koncentruje się w porze dziennej (06:00–18:00), co jest typowe dla dróg obsługujących ruch wahadłowy praca–dom. Pora nocna stanowi 8,3% SDR (680 poj.), przy czym:
+•	Relacje L i P w porze nocnej (łącznie 386 poj.) wskazują na obecność ruchu tranzytowego
+•	Relacja Z1 w porze nocnej (162 poj.) sugeruje istotne znaczenie połączenia PDodniego również poza godzinami szczytu
+Niski udział relacji Z i P1 w porze nocnej (łącznie 14 poj.) potwierdza ich lokalno-dojazdowy charakter.
+
+
+4. INTERPRETACJA STRUKTURY RODZAJOWEJ
+wzór: Struktura ruchu na skrzyżowaniu SK1_B_Sepolenska charakteryzuje się:
+•	Samochody osobowe: 69,8% SDR – nieco niższy udział niż w innych punktach, co wskazuje na większe znaczenie ruchu towarowego
+•	Pojazdy dostawcze: 10,9% – umiarkowany udział świadczący o aktywności gospodarczej
+•	Pojazdy ciężkie łącznie: 16,3% (ciężarowe z naczepami + ciężarowe) – bardzo wysoki udział, wskazujący na znaczenie drogi dla ruchu towarowego międzyregionalnego
+•	Transport publiczny: 1,3% (autobusy + mikrobusy) – niewielki, co potwierdza dominację transportu indywidualnego
+Ruch niezmotoryzowany stanowi 1,1% (93 użytkowników/dobę), w tym:
+•	Rowerzyści: 24 osoby – skoncentrowani głównie na relacji P1 (10 osób)
+•	Piesi: 69 osób – największa obecność na relacji Z1 (28 osób)
+
+
+---
+
+DANE Z PLIKÓW CSV:
+
+1. PARAMETRY:
+             Parametr                                                    Wartość
+         Data pomiaru                                               27 maja 2026
+     Czas rozpoczęcia                                        27.ma.2026 00:00:00
+     Czas zakończenia                                        27.ma.2026 23:59:59
+         Czas trwania                                                 24 godziny
+                  SDR                                           31 185 poj./dobę
+         Szczyt ruchu                                  2352 poj./h o godz. 15:00
+       Dzień tygodnia                                      Środa (dzień roboczy)
+Warunki atmosferyczne                              Bez opadów, temperatura +20°C
+       Metoda pomiaru Rejestracja wideo, klasyfikacja automatyczna z weryfikacją
+
+2. KIERUNKI:
+                             Parametr      B     A     C      E     D     F     G      I     J      H     M      K      L     N
+                                 Wlot     PD    PD    PD   WSCH  WSCH  WSCH  ZACH   ZACH  ZACH   ZACH    PN     PN     PN    PN
+                              Relacja Wprost Prawo  Lewo Wprost  Lewo Prawo  Lewo Wprost Prawo Wprost  Lewo Wprost Wprost Prawo
+                      SDR [poj./dobę]   1948   939   482   4039   931   688  1680   3362  6024   2501  2727   2084   2732  1048
+              SDR osobowe [poj./dobę]   1849   885   458   2918   780   622  1592   2306  5608   2222  2584   1987   2371   981
+            SDR dostawcze [poj./dobę]     46    46    16    291    42    28    67    299   207    165   102     41    198    48
+SDR ciężarowe z naczepami [poj./dobę]      3     0     0    493     6     2     4    373    20     29     0      5     10     2
+            SDR ciężarowe [poj./dobę]      6     5     2    268    20    10     9    306    23     26     5      8     50     9
+ SDR autobusy i mikrobusy [poj./dobę]     32     1     0     32    74     1     1     37    97     20     4     36     72     3
+                      Szczyt [poj./h]    160    71    48    335    87    67   168    250   492    240   206    186    186    84
+                        Godz. szczytu  18:00 11:00 15:00  07:00 15:00 17:00 15:00  15:00 16:00  15:00 07:00  18:00  07:00 16:00
+
+3. PORY DOBY:
+                        Pora    B   A   C    E   D   F    G    I    J    H    M    K    L    N   Sum Udział [%]
+  Pora dzienna (06:00-18:00) 1400 688 342 3034 651 502 1221 2459 4468 2000 2032 1524 1969  775 23065      74.0%
+Pora wieczorna (18:00-22:00)  498 210 131  628 227 171  387  549 1174  400  482  489  526  226  6098      19.6%
+    Pora nocna (22:00-06:00)   50  41   9  377  53  15   72  354  382  101  213   71  237   47  2022       6.5%
+                        Suma 1948 939 482 4039 931 688 1680 3362 6024 2501 2727 2084 2732 1048 31185       100%
+
+4. STRUKTURA RODZAJOWA:
+            Kategoria    B    A   C    E   D   F    G    I    J    H    M    K    L    N   Sum Udział [%]
+              Osobowe 1849  885 458 2918 780 622 1592 2306 5608 2222 2584 1987 2371  981 27163      84.5%
+            Dostawcze   46   46  16  291  42  28   67  299  207  165  102   41  198   48  1596       5.0%
+Ciężarowe z naczepami    3    0   0  493   6   2    4  373   20   29    0    5   10    2   947       2.9%
+            Ciężarowe    6    5   2  268  20  10    9  306   23   26    5    8   50    9   747       2.3%
+             Autobusy   32    1   0   23  69   0    0   31   96   17    0   34   61    1   365       1.1%
+            Mikrobusy    0    0   0    9   5   1    1    6    1    3    4    2   11    2    45       0.1%
+                Rolne    0    0   0    4   1   2    1    8    2    0    0    0    2    4    24       0.1%
+                 Moto   12    2   6   33   8  23    6   33   67   39   32    7   29    1   298       0.9%
+               Rowery   16   48  12   53  44  46   59   28   29   96   55    0   41   52   579       1.8%
+            Hulajnogi    0    3   0    0   0   0    3    0    3    0    5    0    0    4    18       0.1%
+                Piesi   16   55  19   16   2   0   39    2   22   26  132    0    6   27   362       1.1%
+      Pieszy potrzeby    0    2   1    0   0   0    2    0    0    0    8    0    0    2    15       0.0%
+                 Suma 1980 1047 514 4108 977 734 1783 3392 6078 2623 2927 2084 2779 1133 32159       100%
+
+5. DANE GODZINOWE (To jest bardzo ważne - Wstaw to na samym końcu):
+Wlot Relacja  Godz  b.moto  c.osobowe  c3.mikrobusy  d.dostawcze  e.ciężarowe  f.ciężarowe z naczepą  g.autobusy  h.rolne  rowery  hulajnogi  pieszy  pieszy potrzeby
+  PD  Wprost     0       0          2             0            0            0                      0           0        0       0          0       0                0
+  PD  Wprost     1       0          1             0            0            0                      1           0        0       0          0       0                0
+  PD  Wprost     2       0          1             0            2            0                      1           0        0       0          0       0                0
+  PD  Wprost     3       0          1             0            0            0                      0           0        0       0          0       0                0
+  PD  Wprost     4       0          1             0            3            0                      0           1        0       0          0       0                0
+  PD  Wprost     5       0          9             0            1            0                      0           3        0       0          0       0                0
+  PD  Wprost     6       0         74             0            2            0                      0           2        0       2          0       0                0
+  PD  Wprost     7       1        141             0            2            0                      0           2        0       5          0       2                0
+  PD  Wprost     8       1        105             0            1            0                      0           1        0       3          0       6                0
+  PD  Wprost     9       0        106             0            8            1                      1           1        0       4          0       4                0
+  PD  Wprost    10       2         81             0            3            0                      0           2        0       2          0       4                0
+  PD  Wprost    11       1         92             0            3            2                      0           1        0       0          0       0                0
+  PD  Wprost    12       0        113             0            4            1                      0           2        0       0          0       0                0
+  PD  Wprost    13       0        104             0            1            2                      0           2        0       0          0       0                0
+  PD  Wprost    14       3        129             0            1            0                      0           2        0       0          0       0                0
+  PD  Wprost    15       0        122             0            2            0                      0           2        0       0          0       0                0
+  PD  Wprost    16       1        126             0            5            0                      0           1        0       0          0       0                0
+  PD  Wprost    17       0        136             0            2            0                      0           3        0       0          0       0                0
+  PD  Wprost    18       0        157             0            2            0                      0           1        0       0          0       0                0
+  PD  Wprost    19       1        151             0            3            0                      0           1        0       0          0       0                0
+  PD  Wprost    20       0         98             0            1            0                      0           1        0       0          0       0                0
+  PD  Wprost    21       2         78             0            0            0                      0           2        0       0          0       0                0
+  PD  Wprost    22       0         19             0            0            0                      0           2        0       0          0       0                0
+  PD  Wprost    23       0          2             0            0            0                      0           0        0       0          0       0                0
+  PD   Prawo     0       0          1             0            0            0                      0           0        0       0          0       0                0
+  PD   Prawo     1       0          0             0            7            0                      0           0        0       0          0       0                0
+  PD   Prawo     2       0          1             0            1            0                      0           0        0       0          0       0                0
+  PD   Prawo     3       0          1             0            0            0                      0           0        0       0          0       0                0
+  PD   Prawo     4       0          0             0            0            0                      0           0        0       0          0       0                0
+  PD   Prawo     5       0         16             0            0            0                      0           0        0       1          0       0                0
+  PD   Prawo     6       1         45             0            2            0                      0           0        0       0          0       2                0
+  PD   Prawo     7       0         57             0            2            0                      0           0        0       3          0       2                0
+  PD   Prawo     8       0         59             0            1            0                      0           0        0       0          0       2                0
+  PD   Prawo     9       0         52             0            3            0                      0           0        0       2          0       3                0
+  PD   Prawo    10       0         44             0            2            0                      0           0        0       1          0       3                0
+  PD   Prawo    11       0         68             0            3            0                      0           0        0       1          0       0                0
+  PD   Prawo    12       0         41             0            3            1                      0           0        0       3          0       2                0
+  PD   Prawo    13       1         48             0            4            2                      0           0        0       2          0       1                0
+  PD   Prawo    14       0         50             0            3            0                      0           0        0       6          1       3                0
+  PD   Prawo    15       0         62             0            4            1                      0           0        0       2          0       6                0
+  PD   Prawo    16       0         59             0            4            0                      0           0        0       6          0       7                1
+  PD   Prawo    17       0         64             0            2            0                      0           0        0       8          0       6                0
+  PD   Prawo    18       0         67             0            0            0                      0           0        0       5          1       4                1
+  PD   Prawo    19       0         63             0            3            1                      0           1        0       5          1       9                0
+  PD   Prawo    20       0         47             0            1            0                      0           0        0       3          0       0                0
+  PD   Prawo    21       0         27             0            0            0                      0           0        0       0          0       5                0
+  PD   Prawo    22       0          9             0            0            0                      0           0        0       0          0       0                0
+  PD   Prawo    23       0          4             0            1            0                      0           0        0       0          0       0                0
+  PD    Lewo     0       0          0             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo     1       0          0             0            1            0                      0           0        0       0          0       0                0
+  PD    Lewo     2       0          0             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo     3       0          0             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo     4       0          0             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo     5       0          0             0            0            1                      0           0        0       0          0       0                0
+  PD    Lewo     6       1         11             0            0            0                      0           0        0       0          0       2                0
+  PD    Lewo     7       0         16             0            1            0                      0           0        0       0          0       0                0
+  PD    Lewo     8       0         23             0            0            0                      0           0        0       0          0       1                0
+  PD    Lewo     9       0         21             0            1            0                      0           0        0       1          0       0                0
+  PD    Lewo    10       0         31             0            1            1                      0           0        0       1          0       1                0
+  PD    Lewo    11       0         17             0            5            0                      0           0        0       0          0       2                1
+  PD    Lewo    12       1         28             0            2            0                      0           0        0       0          0       2                0
+  PD    Lewo    13       0         32             0            2            0                      0           0        0       1          0       0                0
+  PD    Lewo    14       2         21             0            1            0                      0           0        0       1          0       1                0
+  PD    Lewo    15       0         48             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo    16       0         31             0            2            0                      0           0        0       1          0       2                0
+  PD    Lewo    17       1         42             0            0            0                      0           0        0       3          0       6                0
+  PD    Lewo    18       0         42             0            0            0                      0           0        0       0          0       1                0
+  PD    Lewo    19       0         37             0            0            0                      0           0        0       4          0       0                0
+  PD    Lewo    20       1         30             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo    21       0         21             0            0            0                      0           0        0       0          0       1                0
+  PD    Lewo    22       0          6             0            0            0                      0           0        0       0          0       0                0
+  PD    Lewo    23       0          1             0            0            0                      0           0        0       0          0       0                0
+WSCH  Wprost     0       0          8             0            4            1                      7           0        0       0          0       0                0
+WSCH  Wprost     1       0          6             0            1            2                      9           0        0       0          0       0                0
+WSCH  Wprost     2       0          5             0            3            2                      7           0        0       0          0       0                0
+WSCH  Wprost     3       0          7             0            5            0                     10           0        0       0          0       0                0
+WSCH  Wprost     4       1         28             0            4            4                      7           0        0       0          0       0                0
+WSCH  Wprost     5       1        114             0           10            8                     20           1        0       0          0       0                0
+WSCH  Wprost     6       0        197             0           17           10                     19           0        0       5          0       0                0
+WSCH  Wprost     7       6        248             1           25           15                     38           2        0       2          0       0                0
+WSCH  Wprost     8       1        210             0           36           17                     28           4        0       0          0       0                0
+WSCH  Wprost     9       0        164             0           14           27                     38           1        0       0          0       0                0
+WSCH  Wprost    10       1        124             2           20           23                     32           2        0       1          0       0                0
+WSCH  Wprost    11       1        109             0           22           31                     49           1        1       2          0       0                0
+WSCH  Wprost    12       0        121             0           23           33                     34           0        0       0          0       4                0
+WSCH  Wprost    13       1        128             3           19           26                     25           1        0       2          0       0                0
+WSCH  Wprost    14       4        191             0           14           16                     32           1        0       5          0       2                0
+WSCH  Wprost    15       4        227             1           16           17                     26           4        1       1          0       1                0
+WSCH  Wprost    16       6        207             0           10           15                     24           2        1       5          0       4                0
+WSCH  Wprost    17       1        204             1           15            8                     34           1        1      10          0       2                0
+WSCH  Wprost    18       1        188             1            9            2                     15           0        0       9          0       1                0
+WSCH  Wprost    19       2        146             0            8            4                     13           2        0       8          0       2                0
+WSCH  Wprost    20       1        119             0            9            3                      6           1        0       1          0       0                0
+WSCH  Wprost    21       1         85             0            2            1                      9           0        0       1          0       0                0
+WSCH  Wprost    22       1         54             0            2            0                      6           0        0       1          0       0                0
+WSCH  Wprost    23       0         28             0            3            3                      5           0        0       0          0       0                0
+WSCH    Lewo     0       0          3             0            1            0                      0           0        0       0          0       0                0
+WSCH    Lewo     1       0          0             0            0            0                      0           0        0       0          0       0                0
+WSCH    Lewo     2       0          0             0            0            0                      0           0        0       0          0       0                0
+WSCH    Lewo     3       0          2             0            2            0                      0           0        0       0          0       0                0
+WSCH    Lewo     4       0          1             0            1            0                      0           0        0       0          0       0                0
+WSCH    Lewo     5       0          5             1            0            0                      0           5        0       0          0       0                0
+WSCH    Lewo     6       0         32             1            2            0                      1           4        0       2          0       0                0
+WSCH    Lewo     7       0         41             0            3            0                      1           4        0       4          0       0                0
+WSCH    Lewo     8       1         48             0            4            8                      1           5        0       1          0       0                0
+WSCH    Lewo     9       0         38             0            4            3                      0           5        0       1          0       0                0
+WSCH    Lewo    10       0         34             0            2            1                      0           5        0       2          0       0                0
+WSCH    Lewo    11       1         36             0            2            7                      1           4        0       7          0       0                0
+WSCH    Lewo    12       0         34             0            3            0                      1           3        0       5          0       0                0
+WSCH    Lewo    13       0         33             1            1            0                      1           5        0       3          0       0                0
+WSCH    Lewo    14       0         50             1            3            0                      0           4        1       3          0       0                0
+WSCH    Lewo    15       0         82             0            0            0                      0           5        0       4          0       0                0
+WSCH    Lewo    16       0         52             0            4            0                      0           3        0       2          0       0                0
+WSCH    Lewo    17       1         58             1            1            0                      0           4        0       3          0       0                0
+WSCH    Lewo    18       1         66             0            3            0                      0           2        0       2          0       1                0
+WSCH    Lewo    19       0         64             0            3            0                      0           3        0       0          0       0                0
+WSCH    Lewo    20       1         48             0            2            0                      0           3        0       2          0       1                0
+WSCH    Lewo    21       3         25             0            1            0                      0           2        0       2          0       0                0
+WSCH    Lewo    22       0         23             0            0            1                      0           3        0       1          0       0                0
+WSCH    Lewo    23       0          5             0            0            0                      0           0        0       0          0       0                0
+WSCH   Prawo     0       0          0             0            0            0                      0           0        0       0          0       0                0
+WSCH   Prawo     1       0          0             0            0            0                      0           0        0       0          0       0                0
+WSCH   Prawo     2       0          0             0            0            0                      0           0        0       0          0       0                0
+WSCH   Prawo     3       0          0             0            1            0                      0           0        0       0          0       0                0
+WSCH   Prawo     4       0          1             0            0            0                      0           0        0       1          0       0                0
+WSCH   Prawo     5       2          6             0            1            0                      0           0        0       0          0       0                0
+WSCH   Prawo     6       4         23             0            1            0                      0           0        0       2          0       0                0
+WSCH   Prawo     7       1         39             0            1            1                      0           0        0       2          0       0                0
+WSCH   Prawo     8       0         40             0            4            1                      0           0        1       0          0       0                0
+WSCH   Prawo     9       0         32             0            1            1                      0           0        0       0          0       0                0
+WSCH   Prawo    10       1         33             0            2            1                      1           0        1       4          0       0                0
+WSCH   Prawo    11       1         44             0            2            2                      0           0        0       4          0       0                0
+WSCH   Prawo    12       1         23             0            1            0                      0           0        0       4          0       0                0
+WSCH   Prawo    13       1         23             0            0            1                      1           0        0       3          0       0                0
+WSCH   Prawo    14       2         35             0            5            0                      0           0        0       3          0       0                0
+WSCH   Prawo    15       2         44             1            2            2                      0           0        0       7          0       0                0
+WSCH   Prawo    16       3         47             0            3            0                      0           0        0       5          0       0                0
+WSCH   Prawo    17       1         65             0            1            0                      0           0        0       4          0       0                0
+WSCH   Prawo    18       0         63             0            1            1                      0           0        0       4          0       0                0
+WSCH   Prawo    19       2         48             0            1            0                      0           0        0       0          0       0                0
+WSCH   Prawo    20       1         34             0            1            0                      0           0        0       1          0       0                0
+WSCH   Prawo    21       1         18             0            0            0                      0           0        0       2          0       0                0
+WSCH   Prawo    22       0          3             0            0            0                      0           0        0       0          0       0                0
+WSCH   Prawo    23       0          1             0            0            0                      0           0        0       0          0       0                0
+ZACH    Lewo     0       0          2             0            6            1                      0           0        0       0          0       3                0
+ZACH    Lewo     1       0          1             0            4            0                      0           0        0       0          0       0                0
+ZACH    Lewo     2       0          0             0            0            0                      0           0        0       0          0       0                0
+ZACH    Lewo     3       0          1             0            1            0                      0           0        0       0          0       0                0
+ZACH    Lewo     4       0          8             0            1            0                      0           0        0       0          0       0                0
+ZACH    Lewo     5       0         14             0            0            1                      0           0        0       2          0       4                0
+ZACH    Lewo     6       0         79             0            5            0                      0           0        0       5          0       2                0
+ZACH    Lewo     7       1         72             0            3            1                      0           0        1       2          0       1                0
+ZACH    Lewo     8       0         46             0            3            1                      1           0        0       2          0       1                0
+ZACH    Lewo     9       1         62             0            7            2                      1           0        0       3          0       0                0
+ZACH    Lewo    10       0         60             0            3            0                      0           0        0       0          0       0                0
+ZACH    Lewo    11       1         75             0            6            1                      1           0        0       2          0       1                0
+ZACH    Lewo    12       1         67             0            5            1                      0           0        0       0          0       3                0
+ZACH    Lewo    13       0        101             0            3            1                      1           0        0       2          0       1                0
+ZACH    Lewo    14       0        121             1            2            0                      0           0        0       1          0       4                1
+ZACH    Lewo    15       0        163             0            5            0                      0           0        0      12          0       5                0
+ZACH    Lewo    16       0        165             0            3            0                      0           0        0      11          1       1                1
+ZACH    Lewo    17       1        145             0            2            0                      0           0        0      10          1       4                0
+ZACH    Lewo    18       0        126             0            1            0                      0           0        0       0          0       6                0
+ZACH    Lewo    19       0        121             0            3            0                      0           0        0       7          0       3                0
+ZACH    Lewo    20       1         85             0            0            0                      0           0        0       0          1       0                0
+ZACH    Lewo    21       0         50             0            0            0                      0           0        0       0          0       0                0
+ZACH    Lewo    22       0         23             0            1            0                      0           0        0       0          0       0                0
+ZACH    Lewo    23       0          5             0            3            0                      0           0        0       0          0       0                0
+ZACH  Wprost     0       0         15             0            1            0                      1           0        0       0          0       0                0
+ZACH  Wprost     1       0         11             0            0            0                      2           0        0       0          0       0                0
+ZACH  Wprost     2       0          5             0            4            1                      6           0        0       0          0       0                0
+ZACH  Wprost     3       0          8             0            4            0                      8           0        0       0          0       0                0
+ZACH  Wprost     4       0         26             1            9            2                     14           0        0       0          0       0                0
+ZACH  Wprost     5       1        116             0           13            3                     16           1        0       0          0       0                0
+ZACH  Wprost     6       4        173             0           25           20                     24           0        1       0          0       0                0
+ZACH  Wprost     7       1        124             1           23           29                     24           4        1       0          0       0                0
+ZACH  Wprost     8       0        104             0           30           36                     23           4        1       2          0       0                0
+ZACH  Wprost     9       3         78             0           15           28                     23           1        0       0          0       0                0
+ZACH  Wprost    10       0         87             0           22           32                     38           2        1       1          0       0                0
+ZACH  Wprost    11       0        100             0           18           23                     31           0        2       1          0       0                0
+ZACH  Wprost    12       1        105             1           14           25                     25           4        1       1          0       0                0
+ZACH  Wprost    13       4        122             0           21           29                     21           2        0       3          0       0                0
+ZACH  Wprost    14       2        163             0           21           21                     22           2        0       3          0       0                0
+ZACH  Wprost    15       2        187             2           25           19                     14           1        0       3          0       0                0
+ZACH  Wprost    16       6        191             1           11           13                     20           2        1       6          0       0                0
+ZACH  Wprost    17       1        161             0           10            8                     16           6        0       4          0       1                0
+ZACH  Wprost    18       3        128             0           10           10                     18           0        0       3          0       0                0
+ZACH  Wprost    19       2        131             0            4            3                      5           0        0       0          0       0                0
+ZACH  Wprost    20       1        113             0            9            3                      9           1        0       1          0       0                0
+ZACH  Wprost    21       1         85             0            6            1                      6           0        0       0          0       0                0
+ZACH  Wprost    22       1         50             0            3            0                      1           1        0       0          0       1                0
+ZACH  Wprost    23       0         23             0            1            0                      6           0        0       0          0       0                0
+ZACH   Prawo     0       0         19             0            4            0                      1           1        0       0          0       0                0
+ZACH   Prawo     1       0         11             0            0            0                      1           0        0       0          0       0                0
+ZACH   Prawo     2       0          7             0            1            0                      0           0        0       0          0       0                0
+ZACH   Prawo     3       0          6             0            0            0                      0           1        0       0          0       0                0
+ZACH   Prawo     4       0         16             0            1            0                      0           1        0       0          0       0                0
+ZACH   Prawo     5       1        122             0           12            0                      0           3        0       1          0       0                0
+ZACH   Prawo     6       2        249             0           17            0                      5           4        0       0          0       1                0
+ZACH   Prawo     7       3        290             0           19            3                      0           5        1       0          0       0                0
+ZACH   Prawo     8       3        311             0           23            3                      1           5        0       1          0       0                0
+ZACH   Prawo     9       2        323             0           20            1                      2           5        0       0          0       0                0
+ZACH   Prawo    10       2        295             0            6            6                      2           7        0       2          0       0                0
+ZACH   Prawo    11       2        291             0           16            4                      1           4        0       2          0       0                0
+ZACH   Prawo    12       4        286             1           13            1                      1           8        0       0          0       5                0
+ZACH   Prawo    13       0        328             0           12            2                      1           6        1       3          0       0                0
+ZACH   Prawo    14       5        454             0           13            2                      4          11        0       1          1       3                0
+ZACH   Prawo    15       7        460             0           11            0                      0           7        0       1          0       1                0
+ZACH   Prawo    16       9        467             0           10            0                      0           6        0       2          0       0                0
+ZACH   Prawo    17       5        385             0            9            0                      0           6        0       3          0       5                0
+ZACH   Prawo    18       4        351             0            8            0                      0           3        0       9          0       4                0
+ZACH   Prawo    19       4        311             0            2            0                      0           2        0       4          2       1                0
+ZACH   Prawo    20       7        273             0            4            0                      0           4        0       0          0       0                0
+ZACH   Prawo    21       5        189             0            2            1                      0           4        0       0          0       1                0
+ZACH   Prawo    22       2        118             0            2            0                      0           2        0       0          0       1                0
+ZACH   Prawo    23       0         46             0            2            0                      1           1        0       0          0       0                0
+ZACH  Wprost     0       0          1             0            0            0                      0           0        0       0          0       0                0
+ZACH  Wprost     1       0          1             0            0            0                      0           0        0       0          0       0                0
+ZACH  Wprost     2       0          0             0            0            0                      1           0        0       0          0       0                0
+ZACH  Wprost     3       0          2             0            1            0                      0           0        0       0          0       0                0
+ZACH  Wprost     4       0          3             0            0            1                      1           0        0       1          0       0                0
+ZACH  Wprost     5       0         52             0            0            0                      4           2        0       3          0       0                0
+ZACH  Wprost     6       6        179             1           10            3                      2           0        0       3          0       0                0
+ZACH  Wprost     7       1        142             1           18            1                      1           3        0       6          0       1                0
+ZACH  Wprost     8       1        132             0           14            4                      1           1        0       4          0       1                0
+ZACH  Wprost     9       2         97             0           17            3                      4           1        0       0          0       2                0
+ZACH  Wprost    10       0        108             0           12            2                      3           0        0       2          0       1                0
+ZACH  Wprost    11       3         93             1           14            1                      1           0        0       5          0       4                0
+ZACH  Wprost    12       0        108             0           18            2                      3           3        0       2          0       2                0
+ZACH  Wprost    13       1        104             0           13            4                      3           0        0       8          0       3                0
+ZACH  Wprost    14       4        201             0           12            2                      0           1        0       3          0       3                0
+ZACH  Wprost    15       3        226             0            9            1                      0           1        0       8          0       2                0
+ZACH  Wprost    16       6        206             0           11            2                      1           1        0       9          0       2                0
+ZACH  Wprost    17       5        160             0            6            0                      0           0        0      12          0       0                0
+ZACH  Wprost    18       3        139             0            2            0                      2           1        0      17          0       1                0
+ZACH  Wprost    19       0         95             0            5            0                      0           0        0       9          0       3                0
+ZACH  Wprost    20       1         97             0            0            0                      2           0        0       4          0       1                0
+ZACH  Wprost    21       2         47             0            2            0                      0           2        0       0          0       0                0
+ZACH  Wprost    22       1         19             0            0            0                      0           1        0       0          0       0                0
+ZACH  Wprost    23       0         10             0            1            0                      0           0        0       0          0       0                0
+  PN    Lewo     0       0         10             0            0            0                      0           0        0       0          0       0                0
+  PN    Lewo     1       0          3             0            1            0                      0           0        0       0          0       0                0
+  PN    Lewo     2       0          2             0            0            0                      0           0        0       0          0       0                0
+  PN    Lewo     3       0          4             0            1            0                      0           0        0       0          0       0                0
+  PN    Lewo     4       0         12             0            1            0                      0           0        0       0          0       0                0
+  PN    Lewo     5       1         68             0            5            0                      0           0        0       1          0       1                0
+  PN    Lewo     6       1        155             0           10            0                      0           0        0       2          0       2                0
+  PN    Lewo     7       1        195             0            9            1                      0           0        0       2          0       3                1
+  PN    Lewo     8       1        178             0            5            0                      0           0        0       1          1       5                0
+  PN    Lewo     9       1        157             0            8            1                      0           0        0       1          1       4                0
+  PN    Lewo    10       1        159             0            9            2                      0           0        0       0          0       6                1
+  PN    Lewo    11       3        174             0            5            0                      0           0        0       3          0      11                0
+  PN    Lewo    12       2        137             0            5            0                      0           0        0       0          0       4                1
+  PN    Lewo    13       1        174             1           11            0                      0           0        0       3          1      10                1
+  PN    Lewo    14       4        172             1            7            0                      0           0        0       4          0       8                1
+  PN    Lewo    15       2        128             1            4            1                      0           0        0       6          0       7                1
+  PN    Lewo    16       3        140             0            4            0                      0           0        0       0          1      10                2
+  PN    Lewo    17       2        151             0            5            0                      0           0        0       5          0      17                0
+  PN    Lewo    18       3        170             0            3            0                      0           0        0      10          1      16                0
+  PN    Lewo    19       1        124             0            5            0                      0           0        0       6          0      15                0
+  PN    Lewo    20       2        100             0            3            0                      0           0        0       8          0      12                0
+  PN    Lewo    21       2         69             0            0            0                      0           0        0       3          0       1                0
+  PN    Lewo    22       1         73             1            1            0                      0           0        0       0          0       0                0
+  PN    Lewo    23       0         29             0            0            0                      0           0        0       0          0       0                0
+  PN  Wprost     0       0          4             0            0            0                      0           0        0       0          0       0                0
+  PN  Wprost     1       0          0             0            0            0                      1           0        0       0          0       0                0
+  PN  Wprost     2       0          2             0            0            0                      0           0        0       0          0       0                0
+  PN  Wprost     3       0          0             0            0            0                      1           0        0       0          0       0                0
+  PN  Wprost     4       0          2             0            1            0                      0           2        0       0          0       0                0
+  PN  Wprost     5       0         13             0            1            0                      0           2        0       0          0       0                0
+  PN  Wprost     6       0         39             1            2            0                      0           3        0       0          0       0                0
+  PN  Wprost     7       0        107             0            6            0                      1           2        0       0          0       0                0
+  PN  Wprost     8       1        132             0            3            0                      0           1        0       0          0       0                0
+  PN  Wprost     9       0         90             0            3            0                      1           1        0       0          0       0                0
+  PN  Wprost    10       0        108             1            1            2                      0           2        0       0          0       0                0
+  PN  Wprost    11       0        116             0            2            2                      0           1        0       0          0       0                0
+  PN  Wprost    12       0        106             0            4            2                      0           2        0       0          0       0                0
+  PN  Wprost    13       1        122             0            4            1                      0           2        0       0          0       0                0
+  PN  Wprost    14       1        168             0            1            1                      0           2        0       0          0       0                0
+  PN  Wprost    15       0        156             0            4            0                      0           1        0       0          0       0                0
+  PN  Wprost    16       0        162             0            2            0                      0           3        0       0          0       0                0
+  PN  Wprost    17       0        147             0            2            0                      0           2        0       0          0       0                0
+  PN  Wprost    18       0        184             0            1            0                      0           1        0       0          0       0                0
+  PN  Wprost    19       0        148             0            2            0                      0           2        0       0          0       0                0
+  PN  Wprost    20       3         94             0            1            0                      0           1        0       0          0       0                0
+  PN  Wprost    21       1         48             0            0            0                      0           3        0       0          0       0                0
+  PN  Wprost    22       0         29             0            0            0                      1           1        0       0          0       0                0
+  PN  Wprost    23       0         10             0            1            0                      0           0        0       0          0       0                0
+  PN  Wprost     0       0          9             0            0            0                      0           0        0       0          0       0                0
+  PN  Wprost     1       0          6             0            1            0                      0           0        0       0          0       0                0
+  PN  Wprost     2       0         10             0            3            0                      0           0        0       0          0       0                0
+  PN  Wprost     3       0          6             0            1            0                      0           1        0       0          0       0                0
+  PN  Wprost     4       0         15             0            2            0                      0           1        0       0          0       0                0
+  PN  Wprost     5       0         58             0            3            0                      0           3        0       0          0       0                0
+  PN  Wprost     6       1        120             0           15            2                      0           3        1       8          0       0                0
+  PN  Wprost     7       0        156             0           18            4                      2           6        0      10          0       1                0
+  PN  Wprost     8       1        152             2           22            2                      0           2        0       5          0       2                0
+  PN  Wprost     9       0        131             0           13            6                      1           6        1      16          0       2                0
+  PN  Wprost    10       0        124             0           16            5                      2           3        0       2          0       1                0
+  PN  Wprost    11       1        134             0           17            9                      1           3        0       0          0       0                0
+  PN  Wprost    12       4        127             1           16            4                      0           2        0       0          0       0                0
+  PN  Wprost    13       3        154             0           12            5                      2           5        0       0          0       0                0
+  PN  Wprost    14       1        151             0           12            6                      1           3        0       0          0       0                0
+  PN  Wprost    15       6        155             0           10            1                      1           3        0       0          0       0                0
+  PN  Wprost    16       3        130             0            6            2                      0           4        0       0          0       0                0
+  PN  Wprost    17       3        138             4            8            0                      0           4        0       0          0       0                0
+  PN  Wprost    18       4        146             1            3            1                      0           1        0       0          0       0                0
+  PN  Wprost    19       1        151             0            3            1                      0           3        0       0          0       0                0
+  PN  Wprost    20       1        119             0            8            1                      0           2        0       0          0       0                0
+  PN  Wprost    21       0         71             0            6            0                      0           3        0       0          0       0                0
+  PN  Wprost    22       0         79             2            1            1                      0           3        0       0          0       0                0
+  PN  Wprost    23       0         29             1            2            0                      0           0        0       0          0       0                0
+  PN   Prawo     0       0          0             0            0            0                      0           0        0       0          0       0                0
+  PN   Prawo     1       0          2             0            0            0                      0           0        0       0          0       0                0
+  PN   Prawo     2       0          1             0            0            0                      0           0        0       0          0       0                0
+  PN   Prawo     3       0          2             0            0            0                      0           0        0       0          0       0                0
+  PN   Prawo     4       0          3             0            1            0                      0           0        0       0          0       0                0
+  PN   Prawo     5       0         10             0            5            0                      0           0        0       1          0       0                0
+  PN   Prawo     6       0         67             0            1            0                      0           0        0       3          0       2                0
+  PN   Prawo     7       0         54             0            6            1                      0           0        0       0          0       0                0
+  PN   Prawo     8       0         50             0            4            1                      1           0        3       2          0       1                0
+  PN   Prawo     9       0         41             0            5            4                      1           0        1       1          0       2                1
+  PN   Prawo    10       0         58             0            2            1                      0           0        0       1          0       2                0
+  PN   Prawo    11       0         49             0            4            1                      0           0        0       2          0       1                0
+  PN   Prawo    12       0         51             0            3            1                      0           0        0       2          0       0                0
+  PN   Prawo    13       0         66             0            4            0                      0           0        0       3          1       3                0
+  PN   Prawo    14       0         78             1            1            0                      0           0        0       5          1       3                0
+  PN   Prawo    15       0         61             0            0            0                      0           0        0       5          1       1                0
+  PN   Prawo    16       0         82             0            2            0                      0           0        0       9          0       0                0
+  PN   Prawo    17       1         66             0            2            0                      0           1        0       8          1       2                1
+  PN   Prawo    18       0         79             0            4            0                      0           0        0       5          0       1                0
+  PN   Prawo    19       0         57             0            3            0                      0           0        0       2          0       1                0
+  PN   Prawo    20       0         48             0            1            0                      0           0        0       3          0       5                0
+  PN   Prawo    21       0         34             0            0            0                      0           0        0       0          0       1                0
+  PN   Prawo    22       0         14             1            0            0                      0           0        0       0          0       2                0
+  PN   Prawo    23       0          8             0            0            0                      0           0        0       0          0       0                0
+
+---
+
+Proszę o wygenerowanie pełnych tekstów analitycznych dla wszystkich 5 sekcji, bazując na rzeczywistych danych z CSV.

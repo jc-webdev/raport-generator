@@ -1,0 +1,11 @@
+﻿Parametr,B,A,C,E,D,F,G,I,J,H,M,K,L,N
+Wlot,PD,PD,PD,WSCH,WSCH,WSCH,ZACH,ZACH,ZACH,ZACH,PN,PN,PN,PN
+Relacja,Wprost,Prawo,Lewo,Wprost,Lewo,Prawo,Lewo,Wprost,Prawo,Wprost,Lewo,Wprost,Wprost,Prawo
+SDR [poj./dobę],1948,939,482,4039,931,688,1680,3362,6024,2501,2727,2084,2732,1048
+SDR osobowe [poj./dobę],1849,885,458,2918,780,622,1592,2306,5608,2222,2584,1987,2371,981
+SDR dostawcze [poj./dobę],46,46,16,291,42,28,67,299,207,165,102,41,198,48
+SDR ciężarowe z naczepami [poj./dobę],3,0,0,493,6,2,4,373,20,29,0,5,10,2
+SDR ciężarowe [poj./dobę],6,5,2,268,20,10,9,306,23,26,5,8,50,9
+SDR autobusy i mikrobusy [poj./dobę],32,1,0,32,74,1,1,37,97,20,4,36,72,3
+Szczyt [poj./h],160,71,48,335,87,67,168,250,492,240,206,186,186,84
+Godz. szczytu,18:00,11:00,15:00,07:00,15:00,17:00,15:00,15:00,16:00,15:00,07:00,18:00,07:00,16:00

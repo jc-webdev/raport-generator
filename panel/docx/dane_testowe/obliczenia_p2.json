@@ -1,0 +1,561 @@
+{
+  "obliczenia": {
+    "sdr": 31185,
+    "szczytDobowy": {
+      "wartosc": 2352,
+      "godzina": "15:00"
+    },
+    "szczytOknoPoranne": {
+      "wartosc": 1990,
+      "zakres": "07:00-08:00"
+    },
+    "szczytOknoPopoludniowe": {
+      "wartosc": 2352,
+      "zakres": "15:00-16:00"
+    },
+    "relacjeSDR": [
+      {
+        "wlot": "PN",
+        "manewr": "Prawo",
+        "opis": "Z północy na zachód, w prawo",
+        "sdr": 1048,
+        "udzial": 3.4,
+        "szczyt": 84,
+        "godzinaSzczytu": "16:00"
+      },
+      {
+        "wlot": "PN",
+        "manewr": "Wprost",
+        "opis": "Z północy na południe, na wprost",
+        "sdr": 4816,
+        "udzial": 15.4,
+        "szczyt": 347,
+        "godzinaSzczytu": "14:00"
+      },
+      {
+        "wlot": "PN",
+        "manewr": "Lewo",
+        "opis": "Z północy na wschód, w lewo",
+        "sdr": 2727,
+        "udzial": 8.7,
+        "szczyt": 206,
+        "godzinaSzczytu": "07:00"
+      },
+      {
+        "wlot": "WSCH",
+        "manewr": "Prawo",
+        "opis": "Ze wschodu na północ, w prawo",
+        "sdr": 688,
+        "udzial": 2.2,
+        "szczyt": 67,
+        "godzinaSzczytu": "17:00"
+      },
+      {
+        "wlot": "WSCH",
+        "manewr": "Wprost",
+        "opis": "Ze wschodu na zachód, na wprost",
+        "sdr": 4039,
+        "udzial": 13.0,
+        "szczyt": 335,
+        "godzinaSzczytu": "07:00"
+      },
+      {
+        "wlot": "WSCH",
+        "manewr": "Lewo",
+        "opis": "Ze wschodu na południe, w lewo",
+        "sdr": 931,
+        "udzial": 3.0,
+        "szczyt": 87,
+        "godzinaSzczytu": "15:00"
+      },
+      {
+        "wlot": "PD",
+        "manewr": "Prawo",
+        "opis": "Z południa na wschód, w prawo",
+        "sdr": 939,
+        "udzial": 3.0,
+        "szczyt": 71,
+        "godzinaSzczytu": "11:00"
+      },
+      {
+        "wlot": "PD",
+        "manewr": "Wprost",
+        "opis": "Z południa na północ, na wprost",
+        "sdr": 1948,
+        "udzial": 6.2,
+        "szczyt": 160,
+        "godzinaSzczytu": "18:00"
+      },
+      {
+        "wlot": "PD",
+        "manewr": "Lewo",
+        "opis": "Z południa na zachód, w lewo",
+        "sdr": 482,
+        "udzial": 1.5,
+        "szczyt": 48,
+        "godzinaSzczytu": "15:00"
+      },
+      {
+        "wlot": "ZACH",
+        "manewr": "Prawo",
+        "opis": "Z zachodu na południe, w prawo",
+        "sdr": 6024,
+        "udzial": 19.3,
+        "szczyt": 492,
+        "godzinaSzczytu": "16:00"
+      },
+      {
+        "wlot": "ZACH",
+        "manewr": "Wprost",
+        "opis": "Z zachodu na wschód, na wprost",
+        "sdr": 5863,
+        "udzial": 18.8,
+        "szczyt": 490,
+        "godzinaSzczytu": "15:00"
+      },
+      {
+        "wlot": "ZACH",
+        "manewr": "Lewo",
+        "opis": "Z zachodu na północ, w lewo",
+        "sdr": 1680,
+        "udzial": 5.4,
+        "szczyt": 168,
+        "godzinaSzczytu": "15:00"
+      }
+    ],
+    "relacjeZNiezmot": [
+      {
+        "opis": "Z północy na zachód, w prawo",
+        "suma": 1133,
+        "udzial": 3.5
+      },
+      {
+        "opis": "Z północy na południe, na wprost",
+        "suma": 4863,
+        "udzial": 15.1
+      },
+      {
+        "opis": "Z północy na wschód, w lewo",
+        "suma": 2927,
+        "udzial": 9.1
+      },
+      {
+        "opis": "Ze wschodu na północ, w prawo",
+        "suma": 734,
+        "udzial": 2.3
+      },
+      {
+        "opis": "Ze wschodu na zachód, na wprost",
+        "suma": 4108,
+        "udzial": 12.8
+      },
+      {
+        "opis": "Ze wschodu na południe, w lewo",
+        "suma": 977,
+        "udzial": 3.0
+      },
+      {
+        "opis": "Z południa na wschód, w prawo",
+        "suma": 1047,
+        "udzial": 3.3
+      },
+      {
+        "opis": "Z południa na północ, na wprost",
+        "suma": 1980,
+        "udzial": 6.2
+      },
+      {
+        "opis": "Z południa na zachód, w lewo",
+        "suma": 514,
+        "udzial": 1.6
+      },
+      {
+        "opis": "Z zachodu na południe, w prawo",
+        "suma": 6078,
+        "udzial": 18.9
+      },
+      {
+        "opis": "Z zachodu na wschód, na wprost",
+        "suma": 6015,
+        "udzial": 18.7
+      },
+      {
+        "opis": "Z zachodu na północ, w lewo",
+        "suma": 1783,
+        "udzial": 5.5
+      }
+    ],
+    "relacjeZNiezmotDostepne": true,
+    "relacjeCiezkie": [
+      {
+        "opis": "Z północy na zachód, w prawo",
+        "suma": 11,
+        "udzial": 0.6
+      },
+      {
+        "opis": "Z północy na południe, na wprost",
+        "suma": 73,
+        "udzial": 4.3
+      },
+      {
+        "opis": "Z północy na wschód, w lewo",
+        "suma": 5,
+        "udzial": 0.3
+      },
+      {
+        "opis": "Ze wschodu na północ, w prawo",
+        "suma": 12,
+        "udzial": 0.7
+      },
+      {
+        "opis": "Ze wschodu na zachód, na wprost",
+        "suma": 761,
+        "udzial": 44.9
+      },
+      {
+        "opis": "Ze wschodu na południe, w lewo",
+        "suma": 26,
+        "udzial": 1.5
+      },
+      {
+        "opis": "Z południa na wschód, w prawo",
+        "suma": 5,
+        "udzial": 0.3
+      },
+      {
+        "opis": "Z południa na północ, na wprost",
+        "suma": 9,
+        "udzial": 0.5
+      },
+      {
+        "opis": "Z południa na zachód, w lewo",
+        "suma": 2,
+        "udzial": 0.1
+      },
+      {
+        "opis": "Z zachodu na południe, w prawo",
+        "suma": 43,
+        "udzial": 2.5
+      },
+      {
+        "opis": "Z zachodu na wschód, na wprost",
+        "suma": 734,
+        "udzial": 43.3
+      },
+      {
+        "opis": "Z zachodu na północ, w lewo",
+        "suma": 13,
+        "udzial": 0.8
+      }
+    ],
+    "relacjeCiezkieEstymowane": false,
+    "ruchCiezkiSuma": 1694,
+    "upc": [
+      {
+        "opis": "Z północy na zachód, w prawo",
+        "upc": 1.0
+      },
+      {
+        "opis": "Z północy na południe, na wprost",
+        "upc": 1.5
+      },
+      {
+        "opis": "Z północy na wschód, w lewo",
+        "upc": 0.2
+      },
+      {
+        "opis": "Ze wschodu na północ, w prawo",
+        "upc": 1.7
+      },
+      {
+        "opis": "Ze wschodu na zachód, na wprost",
+        "upc": 18.8
+      },
+      {
+        "opis": "Ze wschodu na południe, w lewo",
+        "upc": 2.8
+      },
+      {
+        "opis": "Z południa na wschód, w prawo",
+        "upc": 0.5
+      },
+      {
+        "opis": "Z południa na północ, na wprost",
+        "upc": 0.5
+      },
+      {
+        "opis": "Z południa na zachód, w lewo",
+        "upc": 0.4
+      },
+      {
+        "opis": "Z zachodu na południe, w prawo",
+        "upc": 0.7
+      },
+      {
+        "opis": "Z zachodu na wschód, na wprost",
+        "upc": 12.5
+      },
+      {
+        "opis": "Z zachodu na północ, w lewo",
+        "upc": 0.8
+      }
+    ],
+    "godzinowa": [
+      {
+        "godzina": "00:00",
+        "zmotoryzowany": 102,
+        "udzialZmot": 0.3,
+        "niezmotoryzowany": 3,
+        "udzialNiezmot": 0.3
+      },
+      {
+        "godzina": "01:00",
+        "zmotoryzowany": 73,
+        "udzialZmot": 0.2,
+        "niezmotoryzowany": 0,
+        "udzialNiezmot": 0.0
+      },
+      {
+        "godzina": "02:00",
+        "zmotoryzowany": 66,
+        "udzialZmot": 0.2,
+        "niezmotoryzowany": 0,
+        "udzialNiezmot": 0.0
+      },
+      {
+        "godzina": "03:00",
+        "zmotoryzowany": 77,
+        "udzialZmot": 0.2,
+        "niezmotoryzowany": 0,
+        "udzialNiezmot": 0.0
+      },
+      {
+        "godzina": "04:00",
+        "zmotoryzowany": 176,
+        "udzialZmot": 0.6,
+        "niezmotoryzowany": 2,
+        "udzialNiezmot": 0.2
+      },
+      {
+        "godzina": "05:00",
+        "zmotoryzowany": 734,
+        "udzialZmot": 2.4,
+        "niezmotoryzowany": 14,
+        "udzialNiezmot": 1.4
+      },
+      {
+        "godzina": "06:00",
+        "zmotoryzowany": 1679,
+        "udzialZmot": 5.4,
+        "niezmotoryzowany": 43,
+        "udzialNiezmot": 4.4
+      },
+      {
+        "godzina": "07:00",
+        "zmotoryzowany": 1990,
+        "udzialZmot": 6.4,
+        "niezmotoryzowany": 47,
+        "udzialNiezmot": 4.8
+      },
+      {
+        "godzina": "08:00",
+        "zmotoryzowany": 1909,
+        "udzialZmot": 6.1,
+        "niezmotoryzowany": 41,
+        "udzialNiezmot": 4.2
+      },
+      {
+        "godzina": "09:00",
+        "zmotoryzowany": 1692,
+        "udzialZmot": 5.4,
+        "niezmotoryzowany": 48,
+        "udzialNiezmot": 4.9
+      },
+      {
+        "godzina": "10:00",
+        "zmotoryzowany": 1636,
+        "udzialZmot": 5.2,
+        "niezmotoryzowany": 38,
+        "udzialNiezmot": 3.9
+      },
+      {
+        "godzina": "11:00",
+        "zmotoryzowany": 1717,
+        "udzialZmot": 5.5,
+        "niezmotoryzowany": 49,
+        "udzialNiezmot": 5.0
+      },
+      {
+        "godzina": "12:00",
+        "zmotoryzowany": 1638,
+        "udzialZmot": 5.3,
+        "niezmotoryzowany": 40,
+        "udzialNiezmot": 4.1
+      },
+      {
+        "godzina": "13:00",
+        "zmotoryzowany": 1816,
+        "udzialZmot": 5.8,
+        "niezmotoryzowany": 54,
+        "udzialNiezmot": 5.5
+      },
+      {
+        "godzina": "14:00",
+        "zmotoryzowany": 2246,
+        "udzialZmot": 7.2,
+        "niezmotoryzowany": 67,
+        "udzialNiezmot": 6.9
+      },
+      {
+        "godzina": "15:00",
+        "zmotoryzowany": 2352,
+        "udzialZmot": 7.5,
+        "niezmotoryzowany": 74,
+        "udzialNiezmot": 7.6
+      },
+      {
+        "godzina": "16:00",
+        "zmotoryzowany": 2281,
+        "udzialZmot": 7.3,
+        "niezmotoryzowany": 88,
+        "udzialNiezmot": 9.0
+      },
+      {
+        "godzina": "17:00",
+        "zmotoryzowany": 2109,
+        "udzialZmot": 6.8,
+        "niezmotoryzowany": 116,
+        "udzialNiezmot": 11.9
+      },
+      {
+        "godzina": "18:00",
+        "zmotoryzowany": 2032,
+        "udzialZmot": 6.5,
+        "niezmotoryzowany": 102,
+        "udzialNiezmot": 10.5
+      },
+      {
+        "godzina": "19:00",
+        "zmotoryzowany": 1746,
+        "udzialZmot": 5.6,
+        "niezmotoryzowany": 82,
+        "udzialNiezmot": 8.4
+      },
+      {
+        "godzina": "20:00",
+        "zmotoryzowany": 1402,
+        "udzialZmot": 4.5,
+        "niezmotoryzowany": 43,
+        "udzialNiezmot": 4.4
+      },
+      {
+        "godzina": "21:00",
+        "zmotoryzowany": 918,
+        "udzialZmot": 2.9,
+        "niezmotoryzowany": 17,
+        "udzialNiezmot": 1.7
+      },
+      {
+        "godzina": "22:00",
+        "zmotoryzowany": 562,
+        "udzialZmot": 1.8,
+        "niezmotoryzowany": 6,
+        "udzialNiezmot": 0.6
+      },
+      {
+        "godzina": "23:00",
+        "zmotoryzowany": 232,
+        "udzialZmot": 0.7,
+        "niezmotoryzowany": 0,
+        "udzialNiezmot": 0.0
+      }
+    ],
+    "niezmotGodzinowoEstymowane": false,
+    "poryDoby": {
+      "dzien": [
+        29163,
+        93.5
+      ],
+      "noc": [
+        2022,
+        6.5
+      ]
+    },
+    "strukturaRodzajowa": [
+      {
+        "kategoria": "Osobowe",
+        "suma": 27163,
+        "udzialZmotoryzowane": 87.1,
+        "udzialCale": 84.5
+      },
+      {
+        "kategoria": "Dostawcze",
+        "suma": 1596,
+        "udzialZmotoryzowane": 5.1,
+        "udzialCale": 5.0
+      },
+      {
+        "kategoria": "Ciężarowe z naczepami",
+        "suma": 947,
+        "udzialZmotoryzowane": 3.0,
+        "udzialCale": 2.9
+      },
+      {
+        "kategoria": "Ciężarowe",
+        "suma": 747,
+        "udzialZmotoryzowane": 2.4,
+        "udzialCale": 2.3
+      },
+      {
+        "kategoria": "Autobusy",
+        "suma": 365,
+        "udzialZmotoryzowane": 1.2,
+        "udzialCale": 1.1
+      },
+      {
+        "kategoria": "Mikrobusy",
+        "suma": 45,
+        "udzialZmotoryzowane": 0.1,
+        "udzialCale": 0.1
+      },
+      {
+        "kategoria": "Rolne",
+        "suma": 24,
+        "udzialZmotoryzowane": 0.1,
+        "udzialCale": 0.1
+      },
+      {
+        "kategoria": "Moto",
+        "suma": 298,
+        "udzialZmotoryzowane": 1.0,
+        "udzialCale": 0.9
+      },
+      {
+        "kategoria": "Rowery",
+        "suma": 579,
+        "udzialZmotoryzowane": null,
+        "udzialCale": 1.8
+      },
+      {
+        "kategoria": "Hulajnogi",
+        "suma": 18,
+        "udzialZmotoryzowane": null,
+        "udzialCale": 0.1
+      },
+      {
+        "kategoria": "Piesi",
+        "suma": 362,
+        "udzialZmotoryzowane": null,
+        "udzialCale": 1.1
+      },
+      {
+        "kategoria": "Pieszy potrzeby",
+        "suma": 15,
+        "udzialZmotoryzowane": null,
+        "udzialCale": 0.0
+      }
+    ],
+    "strukturaRodzajowaSumaCala": 32159
+  },
+  "przypisyJakosciDanych": []
+}

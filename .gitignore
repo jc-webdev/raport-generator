@@ -1,0 +1,36 @@
+# Środowiska/zależności — odtwarzalne przez uruchom-panel.bat / npm install
+generator-mapek/venv/
+node_modules/
+
+# Cache generatorów (dane OSM, dogrywają się same przy pierwszym użyciu)
+generator-mapek/cache/
+Generaotr-mapy-skrzyzowania/cache/
+Generaotr-mapy-skrzyzowania/region_cache/
+
+# Wygenerowane pliki testowe/robocze
+panel/docx/output/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Dane robocze projektów użytkownika (per-projekt CSV/PNG/docx wygenerowane
+# przez panel) — nie jest to kod, tylko dane wejściowe/wyjściowe użytkownika.
+panel/ui/projekty/
+
+# Foldery pomocnicze niebędące częścią repo
+DoWindowska/
+
+# Materiały historyczne/referencyjne spoza kodu panelu — nieużywane przez
+# żadną aktywną ścieżkę kodu (patrz odpowiedź w sesji przy porządkowaniu
+# eksportu na Windows).
+/Archiwum.zip
+/Sankey/
+/dane-do-raportu/
+/Raport_Torun_Orange_v3*.docx
+/Orange_Polska-Logo.wine.png
+
+# Lokalne ustawienia Claude Code (per-maszyna, nie część repo)
+.claude/settings.local.json
+
+# System
+.DS_Store
