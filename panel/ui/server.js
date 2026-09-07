@@ -54,6 +54,18 @@ function envPython() {
   return { ...process.env, PYTHONUTF8: "1", PYTHONIOENCODING: "utf-8" };
 }
 
+// `stderr || err.message` gubiło kod wyjścia/sygnał (np. proces zabity przez
+// crash natywny poza kontrolą wyjątków Pythona — brak tracebacku w stderr,
+// tylko urwany output) — bez tego "err" niesie jedyny ślad co się stało.
+function bladPythona(err, stderr) {
+  const detale = [];
+  if (err.signal) detale.push(`sygnał: ${err.signal}`);
+  if (err.code !== undefined && err.code !== null) detale.push(`kod wyjścia: ${err.code}`);
+  if (err.killed) detale.push("proces zabity (timeout?)");
+  const naglowek = detale.length ? `[${detale.join(", ")}] ` : "";
+  return new Error(`${naglowek}${stderr || err.message}`.trim());
+}
+
 if (!fs.existsSync(PROJEKTY_DIR)) fs.mkdirSync(PROJEKTY_DIR, { recursive: true });
 
 const MIME = {
@@ -186,7 +198,7 @@ function konwertujHistoryNaQuantity(tresc) {
         fs.rmSync(tmpIn, { force: true });
         if (err) {
           fs.rmSync(tmpOut, { force: true });
-          return reject(new Error(stderr || err.message));
+          return reject(bladPythona(err, stderr));
         }
         const wynik = fs.readFileSync(tmpOut, "utf-8");
         fs.rmSync(tmpOut, { force: true });
@@ -419,7 +431,7 @@ function uruchomSilnik(sciezkaProjektu, numerPunktu) {
       ["-m", "panel.silnik.uruchom_dla_punktu", sciezkaProjektu, String(numerPunktu)],
       { cwd: REPO_ROOT, maxBuffer: 50 * 1024 * 1024, env: envPython() },
       (err, stdout, stderr) => {
-        if (err) return reject(new Error(stderr || err.message));
+        if (err) return reject(bladPythona(err, stderr));
         try { resolve(JSON.parse(stdout)); } catch (e) { reject(new Error(`Silnik zwrócił niepoprawny JSON: ${stdout.slice(0, 500)}`)); }
       },
     );
@@ -474,7 +486,7 @@ const PLACEHOLDERY_WSPOLNE = {
 function generujObraz(argi) {
   return new Promise((resolve, reject) => {
     execFile(pythonBin(), argi, { cwd: DOCX_DIR, maxBuffer: 10 * 1024 * 1024, env: envPython() }, (err, stdout, stderr) => {
-      if (err) return reject(new Error(stderr || err.message));
+      if (err) return reject(bladPythona(err, stderr));
       resolve();
     });
   });
@@ -490,7 +502,7 @@ function generujObraz(argi) {
 function spawnPython(argi, cwd, timeoutMs = 120000) {
   return new Promise((resolve, reject) => {
     execFile(pythonBin(), argi, { cwd, maxBuffer: 20 * 1024 * 1024, timeout: timeoutMs, env: envPython() }, (err, stdout, stderr) => {
-      if (err) return reject(new Error(stderr || err.message));
+      if (err) return reject(bladPythona(err, stderr));
       resolve(stdout);
     });
   });
@@ -1078,7 +1090,7 @@ const serwer = http.createServer(async (req, res) => {
             pythonBin(),
             ["-m", "panel.silnik.uruchom_teksty_dla_punktu", sciezkaProjektu(id), numerStr],
             { cwd: REPO_ROOT, maxBuffer: 10 * 1024 * 1024, env: envPython() },
-            (err, stdout, stderr) => (err ? reject(new Error(stderr || err.message)) : resolve(JSON.parse(stdout))),
+            (err, stdout, stderr) => (err ? reject(bladPythona(err, stderr)) : resolve(JSON.parse(stdout))),
           );
         });
         punkt.teksty = teksty;
