@@ -16,7 +16,7 @@ const fs = require("fs");
 const os = require("os");
 const path = require("path");
 const crypto = require("crypto");
-const { execFile } = require("child_process");
+const { execFile, spawn } = require("child_process");
 const { generujTekstWprowadzenie, generujTekstPorownanie } = require("../docx/analizaLaczna");
 const { budujZip } = require("./zip");
 
@@ -758,12 +758,19 @@ async function zbudujRaport(projekt) {
   console.log("Buduję dokument .docx...");
   const sciezkaDocx = path.join(dirBuild, "raport.docx");
   await new Promise((resolve, reject) => {
-    execFile(
+    // spawn (nie execFile) + stdio na żywo do konsoli serwera — execFile
+    // buforuje stdout/stderr i oddaje je dopiero po zakończeniu procesu, więc
+    // przy realnie długim/zawieszonym budowaniu docx konsola milczała mimo
+    // że dziecko cały czas mogło coś logować (patrz [generuj_docx] w kodzie).
+    const dziecko = spawn(
       process.execPath,
       [path.join(DOCX_DIR, "generuj_docx.js"), sciezkaFixture, sciezkaDocx, LOGO_DOMYSLNE, dirBuild],
-      { maxBuffer: 50 * 1024 * 1024 },
-      (err, stdout, stderr) => (err ? reject(new Error(stderr || err.message)) : resolve()),
     );
+    let stderrTresc = "";
+    dziecko.stdout.on("data", (d) => process.stdout.write(d));
+    dziecko.stderr.on("data", (d) => { process.stderr.write(d); stderrTresc += d; });
+    dziecko.on("error", reject);
+    dziecko.on("close", (kod) => (kod === 0 ? resolve() : reject(new Error(stderrTresc || `generuj_docx.js zakończył się kodem ${kod}`))));
   });
   console.log("Raport gotowy ✓");
 

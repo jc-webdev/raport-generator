@@ -28,7 +28,9 @@ async function main() {
   const projekt = JSON.parse(fs.readFileSync(sciezkaFixture, "utf-8"));
   const baseDir = baseDirArg || path.dirname(sciezkaFixture);
   const miasta = [...new Set(projekt.punkty.map((p) => p.miejscowosc))].join(", ");
+  console.error("[generuj_docx] buduję drzewo dokumentu (czyta obrazki z dysku)...");
   const wynik = budujPelnyDokument(projekt, sciezkaLogo, baseDir);
+  console.error("[generuj_docx] drzewo gotowe, pakuję do .docx (XML + zip)...");
 
   const doc = new Document({
     numbering: { config: numeracjaRozdzialowConfig },
@@ -60,6 +62,7 @@ async function main() {
   });
 
   const buffer = await Packer.toBuffer(doc);
+  console.error("[generuj_docx] spakowane, zapisuję na dysk...");
   fs.mkdirSync(path.dirname(sciezkaWyjsciowa), { recursive: true });
   fs.writeFileSync(sciezkaWyjsciowa, buffer);
   console.log(JSON.stringify({ ok: true, sciezka: sciezkaWyjsciowa, liczbaPunktow: wynik.liczbyPerPunkt.length }));
