@@ -499,7 +499,11 @@ function generujObraz(argi) {
 // Wołane tylko gdy punkt ma `lokalizacja.lat/lng` (krok 2); w razie
 // błędu (brak sieci, brak dróg w zcache'owanym regionie...) każdy z nich
 // osobno spada na placeholder — jeden nieudany rysunek nie blokuje reszty.
-function spawnPython(argi, cwd, timeoutMs = 120000) {
+// 300s (nie 120s) — generate_map.py (mapka lokalizacji) nie ma własnego
+// cache'a jak schemat/Sankey, więc na wolniejszych sieciach/maszynach
+// (potwierdzone: SIGTERM po 120s na firmowym Windows) potrafi zwyczajnie
+// nie zdążyć, mimo że docelowo by się udało.
+function spawnPython(argi, cwd, timeoutMs = 300000) {
   return new Promise((resolve, reject) => {
     execFile(pythonBin(), argi, { cwd, maxBuffer: 20 * 1024 * 1024, timeout: timeoutMs, env: envPython() }, (err, stdout, stderr) => {
       if (err) return reject(bladPythona(err, stderr));

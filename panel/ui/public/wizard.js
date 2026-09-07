@@ -323,8 +323,9 @@ async function wyrenderujWizard() {
           godzinowe (wg relacji, pojazdów ciężkich, profil kategorii, warunki atmosferyczne) generują się
           automatycznie — jeśli punkt nie ma koordynatów/daty pomiaru, albo generator akurat zawiedzie
           (np. brak sieci), ten jeden rysunek dostanie placeholder zamiast blokować cały raport.
-          Generowanie z realnymi mapami trwa dłużej niż mogłoby się wydawać (rząd 1-2 min na punkt przy
-          pierwszym uruchomieniu dla danej okolicy, potem szybciej dzięki cache).</p>
+          Generowanie z realnymi mapami trwa dłużej niż mogłoby się wydawać — na wolniejszych sieciach
+          nawet kilka minut na punkt przy pierwszym uruchomieniu dla danej okolicy, potem szybciej dzięki
+          cache. Postęp krok po kroku widać w oknie konsoli serwera.</p>
           <button type="button" id="przycisk-generuj-raport">Generuj raport Word</button>
           <span class="status-zapisu" id="status-generuj-raport"></span>
           <div id="blok-pobierania">${wyrenderujBlokPobierania(p)}</div>`;
