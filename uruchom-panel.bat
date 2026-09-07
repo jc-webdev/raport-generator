@@ -45,14 +45,21 @@ if not exist "generator-mapek\venv\Scripts\python.exe" (
   call generator-mapek\venv\Scripts\pip install -r panel\requirements.txt
 )
 
-if not exist "panel\docx\node_modules" (
+rem Sprawdzamy konkretnie folder pakietu "docx", nie samo istnienie
+rem node_modules - jesli poprzednia instalacja padla w polowie (np. przez
+rem siec/proxy), node_modules mogl zostac utworzony pusty/niepelny i bylby
+rem cicho pomijany przy kolejnych uruchomieniach.
+if not exist "panel\docx\node_modules\docx" (
   echo Brak paczek npm dla generatora dokumentow - instaluje teraz...
   pushd panel\docx
   call npm install
   if errorlevel 1 (
     popd
-    echo BLAD: nie znaleziono komendy "npm". Zainstaluj Node.js ^(instaluje npm razem z nim^)
-    echo i uruchom ten plik ponownie.
+    echo BLAD: instalacja paczek npm nie powiodla sie ^(patrz komunikat powyzej^).
+    echo Najczestsza przyczyna: brak dostepu do rejestru npm przez firmowa
+    echo siec/proxy - npm ma WLASNA konfiguracje proxy, niezalezna od zmiennych
+    echo HTTP_PROXY/HTTPS_PROXY. Sprawdz: npm config get proxy
+    echo Po naprawieniu przyczyny uruchom ten plik ponownie.
     pause
     exit /b 1
   )
