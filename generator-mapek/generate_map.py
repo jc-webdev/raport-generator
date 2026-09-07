@@ -142,7 +142,11 @@ def fetch_features(polygon, tags: dict) -> Optional[gpd.GeoDataFrame]:
         gdf = gpd.clip(gdf, polygon)
         return gdf if not gdf.empty else None
     except Exception as e:
-        logging.debug("features_from_polygon failed for tags %s: %s", tags, e)
+        # WAŻNE: był poziom debug, a logger jest skonfigurowany na INFO -
+        # błąd pobierania dróg/rzek (np. timeout Overpass dla całego miasta,
+        # inny niż region_cache w schemacie/Sankeyu) był całkowicie
+        # niewidoczny, mapa po prostu wychodziła bez nich bez śladu w konsoli.
+        logging.warning("features_from_polygon failed for tags %s: %s", tags, e)
         return None
 
 
@@ -179,7 +183,7 @@ def plot_map(city_gdf: Optional[gpd.GeoDataFrame], point: Point, label: str, out
         try:
             rivers_gdf.plot(ax=ax, facecolor=RIVER_COLOR, edgecolor=RIVER_COLOR, linewidth=1.5, alpha=0.6, zorder=2)
         except Exception as e:
-            logging.debug("river plot failed: %s", e)
+            logging.warning("river plot failed: %s", e)
 
     roads_gdf = fetch_features(city_polygon, MAIN_ROAD_TAGS)
     if roads_gdf is not None:
@@ -188,7 +192,7 @@ def plot_map(city_gdf: Optional[gpd.GeoDataFrame], point: Point, label: str, out
                 ax=ax, color=ROAD_COLOR, linewidth=1.0, zorder=3
             )
         except Exception as e:
-            logging.debug("road plot failed: %s", e)
+            logging.warning("road plot failed: %s", e)
 
     ax.plot(
         point.x, point.y,
@@ -233,7 +237,7 @@ def main():
     try:
         city_gdf = fetch_city_boundary(city, lat, lon)
     except Exception as e:
-        logging.debug("fetch_city_boundary error: %s", e)
+        logging.warning("fetch_city_boundary error: %s", e)
 
     pt = Point(lon, lat)
     if city_gdf is None or city_gdf.empty:
