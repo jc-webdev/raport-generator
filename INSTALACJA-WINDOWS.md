@@ -27,9 +27,11 @@ działania panelu, możesz je pominąć.
 3. Sprawdź w `cmd`: `node --version` powinno wypisać numer wersji.
 
 Jeśli instalator jest zablokowany przez politykę firmy: pobierz sekcję
-"Other Downloads" → **Windows Binary (.zip)** ze strony nodejs.org, rozpakuj
-do dowolnego folderu i uruchamiaj `node.exe` z tego folderu (albo dodaj go
-do zmiennej PATH tylko dla swojego konta).
+"Other Downloads" → **Windows Binary (.zip)** ze strony nodejs.org.
+**`uruchom-panel.bat` sam wykrywa taki "portable" Node** — wystarczy
+wypakować całą zawartość pobranego .zip do nowego folderu **`node-portable`**
+obok pliku `uruchom-panel.bat` (tak, żeby istniała ścieżka
+`node-portable\node.exe`). Nie trzeba nic dodawać do PATH ręcznie.
 
 ## Krok 2 — Python
 
