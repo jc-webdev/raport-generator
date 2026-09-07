@@ -209,6 +209,10 @@ def plot_map(city_gdf: Optional[gpd.GeoDataFrame], point: Point, label: str, out
         logging.info("Saved map to %s", output_path)
     except Exception as e:
         logging.error("Failed to save map: %s", e)
+        # Re-raise (nie tylko zaloguj) — inaczej skrypt kończy się kodem 0
+        # mimo że plik PNG nigdy nie powstał, a wołający (Node) uzna to za
+        # sukces i będzie próbował wstawić do raportu nieistniejący obrazek.
+        raise
     finally:
         plt.close(fig)
 

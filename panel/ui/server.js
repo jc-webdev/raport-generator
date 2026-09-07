@@ -518,6 +518,17 @@ function generujSankey(lat, lon, sciezkaCsv, sciezkaMapping, metryka, wyjscie) {
 
 const METRYKI_SANKEY = { sankeySDR: "sdr", sankeyUPC: "upc", sankeyPoranny: "am_peak", sankeyPopoludniowy: "pm_peak" };
 
+// Błędy generatorów (best-effort, jeden nieudany rysunek nie blokuje reszty)
+// wtapiały się w zwykłe logi postępu, zwłaszcza gdy stderr spawnowanego
+// Pythona zawierał wielolinijkowe INFO/WARNING logging — wyglądało to jak
+// normalny log, nie jak błąd. Wyraźne ograniczniki ">>> BŁĄD <<<" usuwają tę
+// dwuznaczność.
+function logBlad(prefiks, e) {
+  console.error(`\n>>> BŁĄD [${prefiks}] <<<`);
+  console.error(String((e && e.message) || e).trim());
+  console.error(">>> koniec błędu <<<\n");
+}
+
 /**
  * Próbuje wygenerować mapkę/schemat/4x Sankey z realnych koordynatów punktu.
  * Zwraca { [klucz]: sciezkaPliku } tylko dla tego co się faktycznie udało —
@@ -536,7 +547,7 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
     wynik.mapkaLokalizacji = sciezka;
     console.log(`[${punkt.id}] mapka lokalizacji: gotowe ✓`);
   } catch (e) {
-    console.error(`[${punkt.id}] mapka lokalizacji: ${e.message}`);
+    logBlad(`${punkt.id} mapka lokalizacji`, e);
   }
 
   try {
@@ -546,7 +557,7 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
     wynik.schematSkrzyzowania = sciezka;
     console.log(`[${punkt.id}] schemat skrzyżowania: gotowe ✓`);
   } catch (e) {
-    console.error(`[${punkt.id}] schemat skrzyżowania: ${e.message}`);
+    logBlad(`${punkt.id} schemat skrzyżowania`, e);
   }
 
   try {
@@ -562,7 +573,7 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
     wynik.wykresPogoda = sciezka;
     console.log(`[${punkt.id}] wykres pogody: gotowe ✓`);
   } catch (e) {
-    console.error(`[${punkt.id}] wykres pogody: ${e.message}`);
+    logBlad(`${punkt.id} wykres pogody`, e);
   }
 
   try {
@@ -588,11 +599,11 @@ async function spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjekt
         wynik[klucz] = sciezka;
         console.log(`[${punkt.id}] ${klucz}: gotowe ✓`);
       } catch (e) {
-        console.error(`[${punkt.id}] ${klucz}: ${e.message}`);
+        logBlad(`${punkt.id} ${klucz}`, e);
       }
     }
   } catch (e) {
-    console.error(`[${punkt.id}] eksport danych do Sankey: ${e.message}`);
+    logBlad(`${punkt.id} eksport danych do Sankey`, e);
   }
 
   return wynik;
@@ -655,7 +666,7 @@ async function zbudujRaport(projekt) {
       ]);
       fs.unlinkSync(sciezkaGodzinoweJson);
     } catch (e) {
-      console.error(`[${punkt.id}] wykresy godzinowe wg relacji: ${e.message}`);
+      logBlad(`${punkt.id} wykresy godzinowe wg relacji`, e);
     }
 
     // Załącznik wynik_tabele_Punkt{N}_{ID}.xlsx — raport Word (budujPunkt.js)
@@ -669,7 +680,7 @@ async function zbudujRaport(projekt) {
         "-m", "panel.silnik.eksportuj_wynik_tabele", sciezkaProjektu(projekt._id), String(punkt.numer), sciezkaXlsx,
       ], REPO_ROOT);
     } catch (e) {
-      console.error(`[${punkt.id}] wynik_tabele xlsx: ${e.message}`);
+      logBlad(`${punkt.id} wynik_tabele xlsx`, e);
     }
 
     const realneRysunki = await spróbujWygenerowacRealneRysunki(punkt, dirPunktu, sciezkaProjektu(projekt._id));
