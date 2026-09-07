@@ -134,13 +134,21 @@ WATER_TAGS = {"waterway": "river", "natural": "water"}
 def fetch_features(polygon, tags: dict) -> Optional[gpd.GeoDataFrame]:
     """Fetch OSM features (roads/rivers) clipped to the given polygon, if osmnx is available."""
     if ox is None or polygon is None:
+        logging.warning(
+            "fetch_features(tags=%s) pominięte: %s", tags,
+            "osmnx niedostępny" if ox is None else "brak city_polygon (patrz wcześniejszy warning)",
+        )
         return None
     try:
         gdf = ox.features_from_polygon(polygon, tags)
         if gdf is None or gdf.empty:
+            logging.warning("features_from_polygon(tags=%s) zwróciło 0 wyników", tags)
             return None
         gdf = gpd.clip(gdf, polygon)
-        return gdf if not gdf.empty else None
+        if gdf.empty:
+            logging.warning("gpd.clip(tags=%s) zwróciło 0 wyników po przycięciu do granicy", tags)
+            return None
+        return gdf
     except Exception as e:
         # WAŻNE: był poziom debug, a logger jest skonfigurowany na INFO -
         # błąd pobierania dróg/rzek (np. timeout Overpass dla całego miasta,
@@ -168,12 +176,17 @@ def plot_map(city_gdf: Optional[gpd.GeoDataFrame], point: Point, label: str, out
             city_gdf.plot(ax=ax, facecolor=ORANGE_FILL, edgecolor=ORANGE, linewidth=2.5, zorder=1)
             bounds = city_gdf.total_bounds
             city_polygon = unary_union(city_gdf.geometry)
-        except Exception:
+        except Exception as e1:
+            logging.warning("city_gdf.plot/unary_union failed, próbuję fallback GeoSeries: %s", e1)
             try:
                 gpd.GeoSeries(city_gdf.geometry).plot(ax=ax, facecolor=ORANGE_FILL, edgecolor=ORANGE, linewidth=2.5, zorder=1)
                 bounds = city_gdf.total_bounds
                 city_polygon = unary_union(city_gdf.geometry)
-            except Exception:
+            except Exception as e2:
+                # city_polygon zostaje None -> fetch_features (drogi/rzeki) nie
+                # ma czego użyć i cicho zwraca None, bez tego ostrzeżenia
+                # mapa po prostu wychodzi bez dróg/rzek bez żadnego śladu.
+                logging.warning("fallback GeoSeries też zawiódł, mapa będzie bez dróg/rzek: %s", e2)
                 bounds = (point.x - 0.01, point.y - 0.01, point.x + 0.01, point.y + 0.01)
     else:
         bounds = (point.x - 0.01, point.y - 0.01, point.x + 0.01, point.y + 0.01)
