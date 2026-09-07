@@ -1,14 +1,17 @@
 # Minimal Python requirements for generate_map.py
-# Dopięte na sztywno (nie >=) — osmnx regularnie zmienia zachowanie między
-# wersjami (m.in. features_from_polygon), a niedopięte wersje dawały ciche
-# rozjazdy zachowania między maszynami przy oddzielnych `pip install`
-# w różnym czasie (ten sam kod, bez błędu, różny wynik — patrz STAN-PRAC.md).
-# Wersje = to, co faktycznie przetestowane i działające.
-requests==2.32.5
-geopandas==1.0.1
-shapely==2.0.7
-matplotlib==3.9.4
-osmnx==2.0.7
+# Dopięte do konkretnej wersji major.minor (~=), nie luźne >= — osmnx
+# regularnie zmienia zachowanie między wersjami (m.in. features_from_polygon),
+# a niedopięte wersje dawały ciche rozjazdy zachowania między maszynami przy
+# oddzielnych `pip install` w różnym czasie (ten sam kod, bez błędu, różny
+# wynik — patrz STAN-PRAC.md). Dokładny numer patch (==x.y.Z) był z kolei za
+# sztywny — niektóre firmowe mirrory PyPI nie mają najświeższych wydań, więc
+# "no matching distribution" na jednej konkretnej wersji patch. ~=x.y pozwala
+# pipowi dobrać dowolny patch w tej samej gałęzi major.minor.
+requests~=2.32
+geopandas~=1.0
+shapely~=2.0
+matplotlib~=3.9
+osmnx~=2.0
 
 # Optional (requires compilation or conda packages):
 # pyrosm>=0.6.2  # optional: PBF extraction (may fail to build on some systems)
